@@ -11,9 +11,9 @@ entity DF is
             MemWriteD : in std_logic;
             JumpD : in std_logic;
             BranchD : in std_logic;
-            ALUControlD : in std_logic(2 downto 0);
+            ALUControlD : in std_logic_vector(2 downto 0);
             ALUSrcD : in std_logic;
-            ImmSrcD : in std_logic(1 downto 0);
+            ImmSrcD : in std_logic_vector(1 downto 0);
 
             --- Mem In
             InstrF : in std_logic_vector(31 downto 0);
@@ -38,7 +38,7 @@ architecture structural of DF is
             StallIF : in std_logic;
             
             PCF : out std_logic_vector(31 downto 0);
-            PCPlus4 : out std_logic_vector(31 downto 0);
+            PCPlus4 : out std_logic_vector(31 downto 0)
           );
     end component;
 
@@ -70,7 +70,7 @@ architecture structural of DF is
             ImmExtE : in std_logic_vector(31 downto 0);
             AluResultM : in std_logic_vector(31 downto 0);
             ResultW : in std_logic_vector(31 downto 0);
-            ALUControlE : in std_logic_vector(2 downto);
+            ALUControlE : in std_logic_vector(2 downto 0);
             ALUsrcE : in std_logic;
             FowardAE : in std_logic_vector(1 downto 0);
             FowardBE : in std_logic_vector(1 downto 0);
@@ -105,7 +105,7 @@ architecture structural of DF is
             D      : in  std_logic_vector (N-1 downto 0);
             Q      : out std_logic_vector (N-1 downto 0) 
         );
-    end component register;
+    end component;
 
     component HAZARD_UNIT is
         port(

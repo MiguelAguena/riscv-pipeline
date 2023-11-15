@@ -75,6 +75,7 @@ architecture structural of riscv_pp is
     signal ALUSrcD : std_logic;
     signal ImmSrcD : std_logic;
 
+    begin
 
     UnidCtrl: UC
         port map(
