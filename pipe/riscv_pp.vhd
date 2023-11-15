@@ -112,7 +112,4 @@ architecture structural of riscv_pp is
             MemWriteM => MemWriteM
         );
 
-
-begin
-
 end structural ; -- structural

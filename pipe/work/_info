@@ -9,10 +9,10 @@ z2
 cModel Technology
 Z0 dG:/2023/Q3/OAC I/A4/REPO/riscv-pipeline/pipe
 Edf
-w1700086960
+w1700088564
 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
 DPx4 ieee 14 std_logic_1164 0 22 cVAk:aDinOX8^VGI1ekP<3
-!i122 4
+!i122 11
 R0
 8DF.vhd
 FDF.vhd
@@ -22,10 +22,10 @@ VoS3[8IADHYf2l?::H2P5E0
 !s100 QhZX3_o;GA2jgkm6CGNZI2
 OV;C;2020.1;71
 32
-!s110 1700087455
+!s110 1700088605
 !i10b 1
-!s108 1700087455.000000
-!s90 -reportprogress|300|DF.vhd|DF_EX.vhd|DF_ID.vhd|DF_IF.vhd|DF_MEM.vhd|DF_WB.vhd|HAZARD_UNIT.vhd|UC.vhd|alu.vhd|alu_1_bit.vhd|aludecoder.vhd|maindec.vhd|ram.vhd|regfile.vhd|register.vhd|riscv_pp.vhd|rom.vhd|signExtend.vhd|
-!s107 signExtend.vhd|rom.vhd|riscv_pp.vhd|register.vhd|regfile.vhd|ram.vhd|maindec.vhd|aludecoder.vhd|alu_1_bit.vhd|alu.vhd|UC.vhd|HAZARD_UNIT.vhd|DF_WB.vhd|DF_MEM.vhd|DF_IF.vhd|DF_ID.vhd|DF_EX.vhd|DF.vhd|
+!s108 1700088604.000000
+!s90 -reportprogress|300|DF.vhd|DF_EX.vhd|DF_ID.vhd|DF_IF.vhd|DF_WB.vhd|HAZARD_UNIT.vhd|UC.vhd|alu.vhd|alu_1_bit.vhd|aludecoder.vhd|maindec.vhd|ram.vhd|regfile.vhd|register_d.vhd|riscv_pp.vhd|rom.vhd|signExtend.vhd|
+!s107 signExtend.vhd|rom.vhd|riscv_pp.vhd|register_d.vhd|regfile.vhd|ram.vhd|maindec.vhd|aludecoder.vhd|alu_1_bit.vhd|alu.vhd|UC.vhd|HAZARD_UNIT.vhd|DF_WB.vhd|DF_IF.vhd|DF_ID.vhd|DF_EX.vhd|DF.vhd|
 !i113 1
 tExplicit 1 CvgOpt 0

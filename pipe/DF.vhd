@@ -94,7 +94,7 @@ architecture structural of DF is
           );
     end component;
 
-    component register is
+    component register_d is
         generic (
             constant N: integer := 8 
         );
@@ -133,14 +133,13 @@ architecture structural of DF is
 
     signal PCTargetE : std_logic_vector(31 downto 0);
     signal PCSrcE : std_logic;
-    signal StallIF : std_logic;
-    signal PCF : std_logic_vector(31 downto 0);
+    signal StallF, FlushD, StallD, FlushE   : std_logic;
     signal PCPlus4F  : std_logic_vector(31 downto 0);
 
  
     signal InstrD : std_logic_vector(31 downto 0);
     signal ResultW : std_logic_vector(31 downto 0);
-    signal RdW, RdE, RdM, RS1E, RS2E, : std_logic_vector(4 downto 0);
+    signal RdW, RdE, RdM, RS1E, RS2E : std_logic_vector(4 downto 0);
     signal RD1D : std_logic_vector(31 downto 0);
     signal RD2D : std_logic_vector(31 downto 0);
     signal RdD : std_logic_vector(4 downto 0);
@@ -153,24 +152,19 @@ architecture structural of DF is
     signal RD2E : std_logic_vector(31 downto 0);
     signal PCE : std_logic_vector(31 downto 0);
     signal ImmExtE : std_logic_vector(31 downto 0);
-    signal ResultW : std_logic_vector(31 downto 0);
-    signal FowardAE : std_logic_vector(1 downto 0);
-    signal FowardBE : std_logic_vector(1 downto 0);
-    signal PCTargetE : std_logic_vector(31 downto 0);
+    signal ForwardAE : std_logic_vector(1 downto 0);
+    signal ForwardBE : std_logic_vector(1 downto 0);
     signal WriteDataE : std_logic_vector(31 downto 0);
     signal AluResultE : std_logic_vector(31 downto 0);
     signal zeroE : std_logic;
 
 
     signal s_AluResultM : std_logic_vector(31 downto 0);
-    signal MemWriteM : std_logic;
-    signal ReadDataM : std_logic_vector(31 downto 0);
 
 
     signal ReadDataW : std_logic_vector(31 downto 0);
     signal PCPlus4W : std_logic_vector(31 downto 0);
     signal AluResultW : std_logic_vector(31 downto 0);
-    signal ResultW : std_logic_vector(31 downto 0);
 
 
     signal IF_ID_reg_IN, IF_ID_reg_OUT : std_logic_vector(95 downto 0);
@@ -201,7 +195,7 @@ begin
     
     IF_ID_reg_IN <= InstrF & PCF & PCPlus4F;
 
-    IF_ID_reg : register generic map (96) port map(
+    IF_ID_reg : register_d generic map (96) port map(
         clock => Clock,
         clear => FlushD,
         enable => StallD,
@@ -234,12 +228,12 @@ begin
     
     ID_EX_reg_IN <= RegWriteD & ResultSrcD & MemWriteD & JumpD & BranchD & ALUControlD & ALUSrcD & RD1D & RD2D & PCD & RS1D & RS2D & RdD & ImmExtD & PCPlus4D; -- + 10 controle
 
-    ID_EX_reg : register generic map(185) port map (
-        clock <= Clock,
-        clear <= FlushE,
-        enable <= '1',
-        D <= ID_EX_reg_IN,
-        Q <= ID_EX_reg_OUT
+    ID_EX_reg : register_d generic map(185) port map (
+        clock => Clock,
+        clear => FlushE,
+        enable => '1',
+        D => ID_EX_reg_IN,
+        Q => ID_EX_reg_OUT
     );
 
     RegWriteE <= ID_EX_reg_OUT(184);
@@ -282,12 +276,12 @@ begin
 
         EX_MEM_reg_IN <= RegWriteE & ResultSrcE & MemWriteE & AluResultE & WriteDataE & RdE & PCPlus4E; -- + 4 de controle
         
-        EX_MEM_reg : register generic map(105) port map (
-            clock <= Clock,
-            clear <= '0',
-            enable <= '1',
-            D <= EX_MEM_reg_IN,
-            Q <= EX_MEM_reg_OUT
+        EX_MEM_reg : register_d generic map(105) port map (
+            clock => Clock,
+            clear => '0',
+            enable => '1',
+            D => EX_MEM_reg_IN,
+            Q => EX_MEM_reg_OUT
         );
 
         RegWriteM <= EX_MEM_reg_OUT(104);
@@ -304,12 +298,12 @@ begin
         
         MEM_WB_reg_IN <= RegWriteM & ResultSrcM & s_ALUResultM & ReadDataM & RdM & PCPlus4M; -- + 3 sinais de controle
 
-        MEM_WB_reg : register generic map(104) port map (
-            clock <= Clock,
-            clear <= '0',
-            enable <= '1',
-            D <= MEM_WB_reg_IN,
-            Q <= MEM_WB_reg_OUT
+        MEM_WB_reg : register_d generic map(104) port map (
+            clock => Clock,
+            clear => '0',
+            enable => '1',
+            D => MEM_WB_reg_IN,
+            Q => MEM_WB_reg_OUT
         );
 
         RegWriteW <= MEM_WB_reg_OUT(103);

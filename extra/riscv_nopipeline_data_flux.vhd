@@ -52,7 +52,7 @@ architecture datapath_1 of riscv_nopipeline_data_flux is
         );
     end component alu;
 
-    component register is
+    component register_d is
         generic (
             constant N: integer := 8 
         );
@@ -63,7 +63,7 @@ architecture datapath_1 of riscv_nopipeline_data_flux is
             D      : in  std_logic_vector (N-1 downto 0);
             Q      : out std_logic_vector (N-1 downto 0) 
         );
-    end component register;
+    end component register_d;
 
     component regfile is
         generic (
@@ -107,7 +107,7 @@ architecture datapath_1 of riscv_nopipeline_data_flux is
 begin
     pc_load <= '1';
     
-    PC: register generic map(32, 0) port map(
+    PC: register_d generic map(32, 0) port map(
         clock => clock,
         reset => reset,
         load => pc_load,

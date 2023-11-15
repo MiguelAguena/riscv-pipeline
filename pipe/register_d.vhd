@@ -1,7 +1,7 @@
 library ieee;
 use ieee.std_logic_1164.all;
 
-entity register is
+entity register_d is
     generic (
         constant N: integer := 8 
     );
@@ -12,9 +12,9 @@ entity register is
         D      : in  std_logic_vector (N-1 downto 0);
         Q      : out std_logic_vector (N-1 downto 0) 
     );
-end entity register;
+end entity register_d;
 
-architecture comportamental of register is
+architecture comportamental of register_d is
     signal IQ: std_logic_vector(N-1 downto 0) := (others => '0');
 begin
 

@@ -26,7 +26,7 @@ architecture regfile_1 of regfile is
     -- signal load_aux : std_logic_vector(reg_n-1 downto 0);
     signal regbank : std_logic_matrix := (others => (others => '0'));
 begin
-    registerBank: process(clock, reset) is
+    register_dBank: process(clock, reset) is
         begin
             if(reset = '1') then
                 zerando: for i in 1 to 31 loop

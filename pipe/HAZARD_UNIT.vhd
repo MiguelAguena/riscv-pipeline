@@ -28,7 +28,7 @@ end entity;
 architecture structural of HAZARD_UNIT is
     signal Rs1E_equal_to_RdM : std_logic_vector(4 downto 0);
     signal Rs1E_different_than_zero : std_logic_vector(4 downto 0);
-    signal zero : std_logic_vector(4 downto 0) : "0000";
+    signal zero : std_logic_vector(4 downto 0) := "0000";
     signal Rs1E_equal_to_RdW : std_logic_vector(4 downto 0);
 
     signal Rs2E_equal_to_RdM : std_logic_vector(4 downto 0);
@@ -54,10 +54,10 @@ begin
 
     ForwardAE <= "10" when (Rs1E_equal_to_RdM and RegWriteM and Rs1E_different_than_zero) else
                  "01" when (Rs1E_equal_to_RdW and RegWriteW and Rs1E_different_than_zero) else
-                 "00" when others;
+                 "00";
     ForwardBE <= "10" when (Rs2E_equal_to_RdM and RegWriteM and Rs2E_different_than_zero) else 
                  "01" when (Rs2E_equal_to_RdW and RegWriteW and Rs2E_different_than_zero) else
-                 "00" when others;
+                 "00";
     
     lwStall <= ResultSrcE_0 and (Rs1D_equal_to_RdE or Rs2D_equal_to_RdE);
     StallF <= lwStall;

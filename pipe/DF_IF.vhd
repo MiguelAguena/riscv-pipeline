@@ -12,14 +12,14 @@ entity DF_IF is
     StallIF : in std_logic;
     
     PCF : out std_logic_vector(31 downto 0);
-    PCPlus4 : out std_logic_vector(31 downto 0);
+    PCPlus4 : out std_logic_vector(31 downto 0)
   );
 end entity DF_IF;
 
 architecture rtl of DF_IF is
-  signal s_pcplus4 : out std_logic_vector(31 downto);
+  signal s_pcplus4 : out std_logic_vector(31 downto 0);
 
-  component register is
+  component register_d is
       generic (
           constant N: integer := 8 
       );
@@ -60,7 +60,7 @@ begin
 
     pc_enable <= not StallIF;
 
-    PC_REG: register generic map (N => 32) port map (
+    PC_REG: register_d generic map (N => 32) port map (
         clock => clock,
         clear => reset,
         enable => pc_enable,

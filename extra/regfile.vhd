@@ -38,7 +38,7 @@ begin
     
     -- REGS: for i in reg_n-1 downto 0 generate
     --     REG_NONZ: if i > 0 generate
-    --         REGI: register generic map (word_s, 0) port map(
+    --         REGI: register_d generic map (word_s, 0) port map(
     --             d => d,
     --             q => q_aux(i),
     --             clock => clock,
@@ -47,7 +47,7 @@ begin
     --         );
     --     end generate;
     --     REG_Z: if i = 0 generate
-    --         REGZ: register generic map (word_s, 0) port map(
+    --         REGZ: register_d generic map (word_s, 0) port map(
     --             d => std_logic_vector(to_unsigned(0, word_s)),
     --             q => q_aux(i),
     --             clock => clock,
@@ -57,7 +57,7 @@ begin
     --     end generate;
     -- end generate;
     -- regbank(0) <= (others => '0');
-    registerBank: process(clock, reset) is
+    register_dBank: process(clock, reset) is
         begin
             if(reset = '1') then
                 zerando: for i in 1 to 31 loop
