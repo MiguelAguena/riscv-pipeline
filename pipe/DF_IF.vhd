@@ -17,7 +17,7 @@ entity DF_IF is
 end entity DF_IF;
 
 architecture rtl of DF_IF is
-  signal s_pcplus4 : out std_logic_vector(31 downto 0);
+  signal s_pc : std_logic_vector(31 downto 0);
 
   component register_d is
       generic (
@@ -40,7 +40,7 @@ architecture rtl of DF_IF is
         port (
             A, B : in  std_logic_vector(size-1 downto 0);
             F    : out std_logic_vector(size-1 downto 0);
-            S    : in  std_logic_vector(3 downto 0);
+            S    : in  std_logic_vector(2 downto 0);
             Z    : out std_logic;
             Ov   : out std_logic;
             Co   : out std_logic

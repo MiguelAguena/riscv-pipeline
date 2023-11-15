@@ -2,6 +2,9 @@
 
 library ieee;
 use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+use ieee.math_real.all;
+
 
 entity DF_ID is
   port (
@@ -29,6 +32,22 @@ architecture rtl of DF_ID is
             o: out std_logic_vector(31 downto 0)
         );
     end component signExtend;
+
+    component regfile is
+        generic (
+            reg_n: natural := 10;
+            word_s: natural := 32
+        );
+    
+        port (
+            clock:        in  std_logic;
+            reset:        in  std_logic;
+            regWrite:     in  std_logic;
+            rr1, rr2, wr: in  std_logic_vector(natural(ceil(log2(real(reg_n)))) -1 downto 0);
+            d:            in  std_logic_vector(word_s-1 downto 0);
+            q1, q2:       out std_logic_vector(word_s-1 downto 0)
+        );
+    end component;
 
   signal nclock : std_logic;
   signal reg_rr1, reg_rr2 : std_logic_vector(4 downto 0);

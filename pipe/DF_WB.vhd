@@ -16,7 +16,7 @@ entity DF_WB is
 end entity DF_WB;
 
 architecture rtl of DF_WB is
-  signal saida_mux : std_logic_vector(1 downto 0);
+  signal saida_mux : std_logic_vector(31 downto 0);
 
 begin
     with ResultSrcW select

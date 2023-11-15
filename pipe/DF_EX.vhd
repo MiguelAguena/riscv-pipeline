@@ -66,7 +66,7 @@ begin
                     (others => '0') when others;
 
   with AluSrcE select
-    srcB <= s_writeDataE when '0',
+    srcBE <= s_writeDataE when '0',
             ImmExtE when others;
 
   ADDER4: alu generic map(32) port map(

@@ -12,7 +12,7 @@ Edf
 Z1 w1700088903
 Z2 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
 Z3 DPx4 ieee 14 std_logic_1164 0 22 cVAk:aDinOX8^VGI1ekP<3
-!i122 17
+!i122 25
 R0
 Z4 8DF.vhd
 Z5 FDF.vhd
@@ -22,9 +22,9 @@ VoS3[8IADHYf2l?::H2P5E0
 !s100 QhZX3_o;GA2jgkm6CGNZI2
 Z6 OV;C;2020.1;71
 32
-Z7 !s110 1700088919
+Z7 !s110 1700089238
 !i10b 1
-Z8 !s108 1700088919.000000
+Z8 !s108 1700089238.000000
 Z9 !s90 -reportprogress|300|DF.vhd|DF_EX.vhd|DF_ID.vhd|DF_IF.vhd|DF_WB.vhd|HAZARD_UNIT.vhd|UC.vhd|alu.vhd|alu_1_bit.vhd|aludecoder.vhd|maindec.vhd|ram.vhd|regfile.vhd|register_d.vhd|riscv_pp.vhd|rom.vhd|signExtend.vhd|
 Z10 !s107 signExtend.vhd|rom.vhd|riscv_pp.vhd|register_d.vhd|regfile.vhd|ram.vhd|maindec.vhd|aludecoder.vhd|alu_1_bit.vhd|alu.vhd|UC.vhd|HAZARD_UNIT.vhd|DF_WB.vhd|DF_IF.vhd|DF_ID.vhd|DF_EX.vhd|DF.vhd|
 !i113 1
@@ -33,7 +33,7 @@ Astructural
 R2
 R3
 Z12 DEx4 work 2 df 0 22 oS3[8IADHYf2l?::H2P5E0
-!i122 17
+!i122 25
 l181
 Z13 L30 323
 Z14 VKnWKHWLPR[z`kUJdJfBPd0
@@ -48,17 +48,177 @@ R10
 !i113 1
 R11
 Edf_ex
-w1700088918
+Z16 w1700088989
 R2
 R3
-!i122 17
+!i122 25
 R0
-8DF_EX.vhd
-FDF_EX.vhd
+Z17 8DF_EX.vhd
+Z18 FDF_EX.vhd
 l0
 L6 1
 V4Jz4>=EYPM3C`MMQbH;8f3
 !s100 ]EKJ@A=zHmJ?]EDoPXQoj2
+R6
+32
+R7
+!i10b 1
+R8
+R9
+R10
+!i113 1
+R11
+Artl
+R2
+R3
+Z19 DEx4 work 5 df_ex 0 22 4Jz4>=EYPM3C`MMQbH;8f3
+!i122 25
+l46
+Z20 L29 54
+Z21 VV7Z]F5XK1O2Nnd0ICb1QE0
+Z22 !s100 fUBFbKkOzTj4ZbBRkHLjU2
+R6
+32
+R7
+!i10b 1
+R8
+R9
+R10
+!i113 1
+R11
+Edf_id
+Z23 w1700089140
+Z24 DPx4 ieee 9 math_real 0 22 gNk<PdFJ<XNPcfef`f?Z81
+Z25 DPx4 ieee 11 numeric_std 0 22 aU^R8eGcicLcUFIaBQSL>3
+R2
+R3
+!i122 25
+R0
+Z26 8DF_ID.vhd
+Z27 FDF_ID.vhd
+l0
+L9 1
+VM>RzE@0BPPdnI^ko4=4N53
+!s100 ?>JW4Q0L:VKe=``ai7?B;3
+R6
+32
+R7
+!i10b 1
+R8
+R9
+R10
+!i113 1
+R11
+Artl
+R24
+R25
+R2
+R3
+Z28 DEx4 work 5 df_id 0 22 M>RzE@0BPPdnI^ko4=4N53
+!i122 25
+l54
+Z29 L26 62
+Z30 V0kbDQ=lz:FNW1o?]3<QJN1
+Z31 !s100 I[40U7=D1D^3YCIZmI6NF0
+R6
+32
+R7
+!i10b 1
+R8
+R9
+R10
+!i113 1
+R11
+Edf_if
+Z32 w1700089214
+R2
+R3
+!i122 25
+R0
+Z33 8DF_IF.vhd
+Z34 FDF_IF.vhd
+l0
+L6 1
+VNARm9_dac]<dBi:l;UD5Y2
+!s100 PEiWmGd^?6W]@5J3A`W=[3
+R6
+32
+R7
+!i10b 1
+R8
+R9
+R10
+!i113 1
+R11
+Artl
+R2
+R3
+Z35 DEx4 work 5 df_if 0 22 NARm9_dac]<dBi:l;UD5Y2
+!i122 25
+l54
+Z36 L19 61
+Z37 VWO0[AInP9D<Y4=2`BLnVU2
+Z38 !s100 C7EHP`58b4S21k05Ed;a30
+R6
+32
+R7
+!i10b 1
+R8
+R9
+R10
+!i113 1
+R11
+Edf_wb
+Z39 w1700089236
+R2
+R3
+!i122 25
+R0
+Z40 8DF_WB.vhd
+Z41 FDF_WB.vhd
+l0
+L6 1
+V:HFJodJHlOP>C6?_1=aeB2
+!s100 jZ1jPQ;PO9dVdfTzLC5=@2
+R6
+32
+R7
+!i10b 1
+R8
+R9
+R10
+!i113 1
+R11
+Artl
+R2
+R3
+DEx4 work 5 df_wb 0 22 :HFJodJHlOP>C6?_1=aeB2
+!i122 25
+l21
+L18 12
+V8gjnzJ8]K;kFRRSlA9;`c1
+!s100 LRV_o8eXh8J6Z1`af3I@R3
+R6
+32
+R7
+!i10b 1
+R8
+R9
+R10
+!i113 1
+R11
+Ehazard_unit
+w1700087890
+R2
+R3
+!i122 25
+R0
+8HAZARD_UNIT.vhd
+FHAZARD_UNIT.vhd
+l0
+L4 1
+VafanjR`b@:gY<@ZL:7hm90
+!s100 XQ_EXD3TA=;6E=N03Gj][1
 R6
 32
 R7
