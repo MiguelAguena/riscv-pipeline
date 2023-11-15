@@ -6,9 +6,6 @@ entity alu_1_bit is
     port (
         A, B       : in  std_logic;
         F          : out std_logic;
-        NOTA, NOTB : in  std_logic;
-        LESS       : in  std_logic;
-        SET        : out std_logic;
         Ci         : in  std_logic;
         Ov         : out std_logic;
         Co         : out std_logic;
@@ -23,13 +20,10 @@ architecture alu_1_bit_1 of alu_1_bit is
     signal adder_aux : std_logic;
     signal result_aux : std_logic;
 begin
-    a_aux <= A when NOTA = '0' else
-       (NOT A) when NOTA = '1' else
-       '0';
+    a_aux <= A;
 
-    b_aux <= B when NOTB = '0' else
-       (NOT B) when NOTB = '1' else
-       '0';
+    b_aux <= B when OP = "01" else
+             (NOT B); 
 
     and_aux <= a_aux AND b_aux;
     or_aux <= a_aux OR b_aux;
@@ -37,11 +31,9 @@ begin
     adder_aux <= ((a_aux XOR a_aux) XOR Ci);
     Co <= (a_aux AND b_aux) OR (a_aux AND Ci) OR (b_aux AND Ci);
 
-    result_aux <= and_aux when Op = "00" else
-         or_aux when Op = "01" else
-         adder_aux when Op = "10" else
-         LESS when Op = "11" else
-         '0';
+    result_aux <= and_aux when Op = "10" else
+                  or_aux when Op = "11" else
+                  adder_aux;
 
     SET <= adder_aux;
 

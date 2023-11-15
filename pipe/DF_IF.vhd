@@ -5,11 +5,13 @@ use ieee.std_logic_1164.all;
 
 entity DF_IF is
   port (
-    PCTarget : in std_logic_vector(31 downto 0);
-    PCSrc : in std_logic;
+    Clock : in std_logic;
+    Reset : in std_logic;
+    PCTargetE : in std_logic_vector(31 downto 0);
+    PCSrcE : in std_logic;
     StallIF : in std_logic;
     
-    imAddr : out std_logic_vector(31 downto 0);
+    PCF : out std_logic_vector(31 downto 0);
     PCPlus4 : out std_logic_vector(31 downto 0);
   );
 end entity DF_IF;
@@ -45,35 +47,33 @@ architecture rtl of DF_IF is
         );
     end component alu;
 
-  signal pc_in : std_logic_vector(31 downto 0);
+  signal pc_in, s_pcplus4 : std_logic_vector(31 downto 0);
   signal pc_enable: std_logic;
   
-  constant add_op : std_logic_vector(3 downto 0) := "0010"; ---VERIFICAR SE OS OPS VÃO MUDAR
   constant number_4_aux : std_logic_vector(31 downto 0) := (2 => '1', others => '0');
 begin
   -- Adicione aqui a lógica do componente
 
-    with PCSrc select
-        pc_in <= PCTarget when '1',
+    with PCSrcE select
+        pc_in <= PCTargetE when '1',
                  s_pcplus4 when others;
 
     pc_enable <= not StallIF;
 
     PC_REG: register generic map (N => 32) port map (
         clock => clock,
-        clear => clear,
+        clear => reset,
         enable => pc_enable,
         D => pc_in,
         Q => s_pc
     );
 
+    PCF <= s_pc;
+
     PC_PLUS_4: alu generic map (size => 32) port map (
         A => s_pc,
         B => number_4_aux,
         F => s_pcplus4,
-        S => add_op,
-        Z => open,
-        Ov => open,
-        Co => open
+        S => "000"
     );
 end architecture rtl;

@@ -1,27 +1,27 @@
 library ieee;
 use ieee.numeric_std.all;
 
-entity riscv_nopipeline_control_unit is
+entity UC is
     port(
         --To Datapath
-        resultSrc : out std_logic_vector(1 downto 0);
-        pcSrc : out std_logic;
-        immSrc : out std_logic_vector(1 downto 0);
-        aluControl : out std_logic_vector(2 downto 0);
-        memWrite : out std_logic;
-        aluSrc : out std_logic;
-        regWrite : out std_logic;
+        RegWriteD : out std_logic;
+        ResultSrcD : out std_logic_vector(1 downto 0);
+        MemWriteD : out std_logic;
+        JumpD : out std_logic;
+        BranchD : out std_logic;
+        ALUControlD : out std_logic(2 downto 0);
+        ALUSrcD : out std_logic;
+        ImmSrcD : out std_logic(1 downto 0);
         
         --From Datapath
-        zero   : in std_logic;
         opcode : in std_logic_vector(6 downto 0);
         funct3 : in std_logic_vector(2 downto 0);
-        funct7 : in std_logic
+        funct7 : in std_logic_vector(6 downto 0)
     );
 
-end riscv_nopipeline_control_unit;
+end UC;
 
-architecture controlunit_1 of riscv_nopipeline_control_unit is
+architecture controlunit_1 of UC is
     signal aluOp : std_logic_vector(1 downto 0);
     signal branch, jump : std_logic;
     
@@ -50,15 +50,14 @@ begin
     maindeci: maindec 
         port map(
             op => opcode,
-            ResultSrc => resultSrc,
-            MemWrite => memWrite,
-            Branch => branch,
-            ALUSrc => aluSrc,
-            RegWrite => regWrite,
-            Jump => jump,
-            ImmSrc => immSrc,
+            ResultSrc => ResultSrcD,
+            MemWrite => MemWriteD,
+            Branch => BranchD,
+            ALUSrc => ALUSrcD,
+            RegWrite => RegWriteD,
+            Jump => JumpD,
+            ImmSrc => ImmSrcD,
             ALUOp => aluOp
         );
-    ad: aludec port map(opcode(5), funct3, funct7, ALUOp, ALUControl);
-    pcSrc <= jump or (branch and zero);
+    ad: aludec port map(opcode(5), funct3, funct7(5), ALUOp, ALUControlD);
 end architecture;

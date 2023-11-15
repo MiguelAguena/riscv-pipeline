@@ -10,19 +10,6 @@ entity riscv is
         imAddr , dmAddr, writeData : out std_logic_vector(31 downto 0)
     );
 end riscv;
-
---- PIPELINE
-
-architecture pipeline of riscv is
-    signal 
-
-begin
-end pipeline;
-
-
-
-
-
  ---- BASE NO PIPELINE
 architecture nopipeline of riscv is
 
