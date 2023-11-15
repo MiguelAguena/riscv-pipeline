@@ -150,7 +150,7 @@ architecture structural of DF is
 
     signal RD1E : std_logic_vector(31 downto 0);
     signal RD2E : std_logic_vector(31 downto 0);
-    signal PCE : std_logic_vector(31 downto 0);
+    signal PCE, s_PCF : std_logic_vector(31 downto 0);
     signal ImmExtE : std_logic_vector(31 downto 0);
     signal ForwardAE : std_logic_vector(1 downto 0);
     signal ForwardBE : std_logic_vector(1 downto 0);
@@ -168,9 +168,9 @@ architecture structural of DF is
 
 
     signal IF_ID_reg_IN, IF_ID_reg_OUT : std_logic_vector(95 downto 0);
-    signal ID_EX_reg_IN, ID_EX_reg_OUT : std_logic_vector(255 downto 0);
-    signal EX_MEM_reg_IN, EX_MEM_reg_OUT : std_logic_vector(127 downto 0);
-    signal MEM_WB_reg_IN, MEM_WB_reg_OUT : std_logic_vector(127 downto 0);
+    signal ID_EX_reg_IN, ID_EX_reg_OUT : std_logic_vector(184 downto 0);
+    signal EX_MEM_reg_IN, EX_MEM_reg_OUT : std_logic_vector(104 downto 0);
+    signal MEM_WB_reg_IN, MEM_WB_reg_OUT : std_logic_vector(103 downto 0);
     
     
     signal PCD, PCPlus4D, PCPlus4E, PCPlus4M : std_logic_vector(31 downto 0);
@@ -189,11 +189,12 @@ begin
             PCTargetE => PCTargetE,
             PCSrcE => PCSrcE,
             StallIF => StallF,
-            PCF => PCF,
+            PCF => s_PCF,
             PCPlus4 => PCPlus4F            
         );
     
-    IF_ID_reg_IN <= InstrF & PCF & PCPlus4F;
+    IF_ID_reg_IN <= InstrF & s_PCF & PCPlus4F;
+    PCF <= s_PCF;
 
     IF_ID_reg : register_d generic map (96) port map(
         clock => Clock,
@@ -266,8 +267,8 @@ begin
             ResultW => ResultW,
             ALUControlE => ALUControlE,
             ALUsrcE => ALUsrcE,
-            FowardAE => FowardAE,
-            FowardBE => FowardBE,
+            FowardAE => ForwardAE,
+            FowardBE => ForwardBE,
             PCTargetE => PCTargetE,
             WriteDataE => WriteDataE,
             AluResultE => AluResultE,
@@ -332,7 +333,7 @@ begin
             RdE => RdE,
             Rs2E => Rs2E,
             Rs1E => Rs1E,
-            PCScrE => PCScrE,
+            PCScrE => PCSrcE,
             ResultSrcE_0 => ResultSrcE(0),
             RdM => RdM,
             RegWriteM => RegWriteM,

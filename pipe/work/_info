@@ -9,23 +9,62 @@ z2
 cModel Technology
 Z0 dG:/2023/Q3/OAC I/A4/REPO/riscv-pipeline/pipe
 Edf
-w1700088564
-DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
-DPx4 ieee 14 std_logic_1164 0 22 cVAk:aDinOX8^VGI1ekP<3
-!i122 11
+Z1 w1700088903
+Z2 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
+Z3 DPx4 ieee 14 std_logic_1164 0 22 cVAk:aDinOX8^VGI1ekP<3
+!i122 17
 R0
-8DF.vhd
-FDF.vhd
+Z4 8DF.vhd
+Z5 FDF.vhd
 l0
 L4 1
 VoS3[8IADHYf2l?::H2P5E0
 !s100 QhZX3_o;GA2jgkm6CGNZI2
-OV;C;2020.1;71
+Z6 OV;C;2020.1;71
 32
-!s110 1700088605
+Z7 !s110 1700088919
 !i10b 1
-!s108 1700088604.000000
-!s90 -reportprogress|300|DF.vhd|DF_EX.vhd|DF_ID.vhd|DF_IF.vhd|DF_WB.vhd|HAZARD_UNIT.vhd|UC.vhd|alu.vhd|alu_1_bit.vhd|aludecoder.vhd|maindec.vhd|ram.vhd|regfile.vhd|register_d.vhd|riscv_pp.vhd|rom.vhd|signExtend.vhd|
-!s107 signExtend.vhd|rom.vhd|riscv_pp.vhd|register_d.vhd|regfile.vhd|ram.vhd|maindec.vhd|aludecoder.vhd|alu_1_bit.vhd|alu.vhd|UC.vhd|HAZARD_UNIT.vhd|DF_WB.vhd|DF_IF.vhd|DF_ID.vhd|DF_EX.vhd|DF.vhd|
+Z8 !s108 1700088919.000000
+Z9 !s90 -reportprogress|300|DF.vhd|DF_EX.vhd|DF_ID.vhd|DF_IF.vhd|DF_WB.vhd|HAZARD_UNIT.vhd|UC.vhd|alu.vhd|alu_1_bit.vhd|aludecoder.vhd|maindec.vhd|ram.vhd|regfile.vhd|register_d.vhd|riscv_pp.vhd|rom.vhd|signExtend.vhd|
+Z10 !s107 signExtend.vhd|rom.vhd|riscv_pp.vhd|register_d.vhd|regfile.vhd|ram.vhd|maindec.vhd|aludecoder.vhd|alu_1_bit.vhd|alu.vhd|UC.vhd|HAZARD_UNIT.vhd|DF_WB.vhd|DF_IF.vhd|DF_ID.vhd|DF_EX.vhd|DF.vhd|
 !i113 1
-tExplicit 1 CvgOpt 0
+Z11 tExplicit 1 CvgOpt 0
+Astructural
+R2
+R3
+Z12 DEx4 work 2 df 0 22 oS3[8IADHYf2l?::H2P5E0
+!i122 17
+l181
+Z13 L30 323
+Z14 VKnWKHWLPR[z`kUJdJfBPd0
+Z15 !s100 bSja?bA22MH5[n3W9d`E[0
+R6
+32
+R7
+!i10b 1
+R8
+R9
+R10
+!i113 1
+R11
+Edf_ex
+w1700088918
+R2
+R3
+!i122 17
+R0
+8DF_EX.vhd
+FDF_EX.vhd
+l0
+L6 1
+V4Jz4>=EYPM3C`MMQbH;8f3
+!s100 ]EKJ@A=zHmJ?]EDoPXQoj2
+R6
+32
+R7
+!i10b 1
+R8
+R9
+R10
+!i113 1
+R11

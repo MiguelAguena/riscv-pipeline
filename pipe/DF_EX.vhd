@@ -14,7 +14,7 @@ entity DF_EX is
         ImmExtE : in std_logic_vector(31 downto 0);
         AluResultM : in std_logic_vector(31 downto 0);
         ResultW : in std_logic_vector(31 downto 0);
-        ALUControlE : in std_logic_vector(2 downto);
+        ALUControlE : in std_logic_vector(2 downto 0);
         ALUsrcE : in std_logic;
         FowardAE : in std_logic_vector(1 downto 0);
         FowardBE : in std_logic_vector(1 downto 0);
