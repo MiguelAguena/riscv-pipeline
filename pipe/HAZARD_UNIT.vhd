@@ -26,44 +26,45 @@ entity HAZARD_UNIT is
 end entity;
 
 architecture structural of HAZARD_UNIT is
-    signal Rs1E_equal_to_RdM : std_logic_vector(4 downto 0);
-    signal Rs1E_different_than_zero : std_logic_vector(4 downto 0);
-    signal zero : std_logic_vector(4 downto 0) := "0000";
-    signal Rs1E_equal_to_RdW : std_logic_vector(4 downto 0);
+    signal Rs1E_equal_to_RdM : std_logic;
+    signal Rs1E_different_than_zero : std_logic;
+    signal Rs2E_different_than_zero : std_logic;
+    signal zero : std_logic_vector(4 downto 0) := "00000";
+    signal Rs1E_equal_to_RdW : std_logic;
 
-    signal Rs2E_equal_to_RdM : std_logic_vector(4 downto 0);
-    signal Rs2E_equal_to_zero : std_logic_vector(4 downto 0);
-    signal Rs2E_equal_to_RdW : std_logic_vector(4 downto 0);
+    signal Rs2E_equal_to_RdM : std_logic;
+    signal Rs2E_equal_to_zero : std_logic;
+    signal Rs2E_equal_to_RdW : std_logic;
 
-    signal Rs1D_equal_to_RdE : std_logic_vector(4 downto 0);
-    signal Rs2D_equal_to_RdE : std_logic_vector(4 downto 0);
+    signal Rs1D_equal_to_RdE : std_logic;
+    signal Rs2D_equal_to_RdE : std_logic;
 
     signal lwStall : std_logic;
 
 begin 
-    Rs1E_equal_to_RdM <= Rs1E XNOR RdM;
-    Rs1E_different_than_zero <= Rs1E XOR zero;
-    Rs1E_equal_to_RdW <= Rs1E XNOR RdW;
+    Rs1E_equal_to_RdM <= '1' when Rs1E = RdM else '0';
+    Rs1E_different_than_zero <= '1' when Rs1E /= zero else '0';
+    Rs1E_equal_to_RdW <= '1' when Rs1E = RdW else '0';
 
-    Rs2E_equal_to_RdM <= Rs2E XNOR RdM;
-    Rs2E_different_than_zero <= Rs2E XOR zero;
-    Rs2E_equal_to_RdW <= Rs2E XNOR RdW;
+    Rs2E_equal_to_RdM <= '1' when Rs2E = RdM else '0';
+    Rs2E_different_than_zero <= '1' when Rs2E /= zero else '0';
+    Rs2E_equal_to_RdW <= '1' when Rs2E = RdW else '0';
 
-    Rs1D_equal_to_RdE <= Rs1D XNOR RdE;
-    Rs2D_equal_to_RdE <= Rs2D XNOR RdE;
+    Rs1D_equal_to_RdE <= '1' when Rs1D = RdE else '0';
+    Rs2D_equal_to_RdE <= '1' when Rs2D = RdE else '0';
 
-    ForwardAE <= "10" when (Rs1E_equal_to_RdM and RegWriteM and Rs1E_different_than_zero) else
-                 "01" when (Rs1E_equal_to_RdW and RegWriteW and Rs1E_different_than_zero) else
+    ForwardAE <= "10" when (Rs1E_equal_to_RdM and RegWriteM and Rs1E_different_than_zero) = '1' else
+                 "01" when (Rs1E_equal_to_RdW and RegWriteW and Rs1E_different_than_zero) = '1' else
                  "00";
-    ForwardBE <= "10" when (Rs2E_equal_to_RdM and RegWriteM and Rs2E_different_than_zero) else 
-                 "01" when (Rs2E_equal_to_RdW and RegWriteW and Rs2E_different_than_zero) else
+    ForwardBE <= "10" when (Rs2E_equal_to_RdM and RegWriteM and Rs2E_different_than_zero) ='1' else 
+                 "01" when (Rs2E_equal_to_RdW and RegWriteW and Rs2E_different_than_zero) ='1' else
                  "00";
     
     lwStall <= ResultSrcE_0 and (Rs1D_equal_to_RdE or Rs2D_equal_to_RdE);
     StallF <= lwStall;
     StallD <= lwStall;
 
-    FlushD <= PCSrcE;
-    FlushE <= lwStall or PCSrcE;
+    FlushD <= PCScrE;
+    FlushE <= lwStall or PCScrE;
 
 end architecture;
