@@ -81,11 +81,11 @@ begin
 
     Ov <= ov_aux;
 
-    slt_aux <= (NOT(A(size-1) XOR B(size-1)) AND NOT(co(size-1))) OR (A(size-1) AND NOT(B(size-1)));
+    slt_aux <= (NOT(A(size-1) XOR B(size-1)) AND NOT(co_aux(size-1))) OR (A(size-1) AND NOT(B(size-1)));
 
     Z <= '1' when result_aux = zero_aux else
          '0';
-    Co <= co_aux(size-1);
+    Co <= co_aux(size-1);   
     
     F <= slt_out when S(2) = '1' else
          result_aux;

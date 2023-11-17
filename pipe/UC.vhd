@@ -1,5 +1,6 @@
 library ieee;
 use ieee.numeric_std.all;
+use ieee.std_logic_1164.all;
 
 entity UC is
     port(
@@ -9,9 +10,9 @@ entity UC is
         MemWriteD : out std_logic;
         JumpD : out std_logic;
         BranchD : out std_logic;
-        ALUControlD : out std_logic(2 downto 0);
+        ALUControlD : out std_logic_vector(2 downto 0);
         ALUSrcD : out std_logic;
-        ImmSrcD : out std_logic(1 downto 0);
+        ImmSrcD : out std_logic_vector(1 downto 0);
         
         --From Datapath
         opcode : in std_logic_vector(6 downto 0);

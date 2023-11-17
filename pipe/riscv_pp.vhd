@@ -28,9 +28,9 @@ architecture structural of riscv_pp is
             MemWriteD : out std_logic;
             JumpD : out std_logic;
             BranchD : out std_logic;
-            ALUControlD : out std_logic(2 downto 0);
+            ALUControlD : out std_logic_vector(2 downto 0);
             ALUSrcD : out std_logic;
-            ImmSrcD : out std_logic(1 downto 0);
+            ImmSrcD : out std_logic_vector(1 downto 0);
             
             --From Datapath
             opcode : in std_logic_vector(6 downto 0);
@@ -50,9 +50,9 @@ architecture structural of riscv_pp is
             MemWriteD : in std_logic;
             JumpD : in std_logic;
             BranchD : in std_logic;
-            ALUControlD : in std_logic(2 downto 0);
+            ALUControlD : in std_logic_vector(2 downto 0);
             ALUSrcD : in std_logic;
-            ImmSrcD : in std_logic(1 downto 0);
+            ImmSrcD : in std_logic_vector(1 downto 0);
 
             --- Mem In
             InstrF : in std_logic_vector(31 downto 0);
@@ -67,13 +67,13 @@ architecture structural of riscv_pp is
     end component;
 
     signal RegWriteD : std_logic;
-    signal ResultSrcD : std_logic;
+    signal ResultSrcD : std_logic_vector(1 downto 0);
     signal MemWriteD : std_logic;
     signal JumpD : std_logic;
     signal BranchD : std_logic;
-    signal ALUControlD : std_logic;
+    signal ALUControlD : std_logic_vector(2 downto 0);
     signal ALUSrcD : std_logic;
-    signal ImmSrcD : std_logic;
+    signal ImmSrcD : std_logic_vector(1 downto 0);
 
     begin
 

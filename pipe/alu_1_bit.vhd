@@ -34,8 +34,7 @@ begin
     result_aux <= and_aux when Op = "10" else
                   or_aux when Op = "11" else
                   adder_aux;
-
-    SET <= adder_aux;
+  
 
     Ov <= (NOT(adder_aux) AND a_aux AND b_aux) OR (adder_aux AND NOT(a_aux) AND NOT(b_aux));
     
