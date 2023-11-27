@@ -1,2 +1,7 @@
 /pipe/quartus/*
 
+db/*
+incremental_db/*
+output_files/*
+riscv-pipeline.qpf
+riscv-pipeline.qsf
