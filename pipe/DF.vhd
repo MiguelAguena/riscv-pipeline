@@ -2,29 +2,29 @@ library ieee;
 use ieee.std_logic_1164.all;
 
 entity DF is
-    port(
-            --- Control IN
-            reset : in std_logic;
-            clock : in std_logic;
-            RegWriteD : in std_logic;
-            ResultSrcD : in std_logic_vector(1 downto 0);
-            MemWriteD : in std_logic;
-            JumpD : in std_logic;
-            BranchD : in std_logic;
-            ALUControlD : in std_logic_vector(2 downto 0);
-            ALUSrcD : in std_logic;
-            ImmSrcD : in std_logic_vector(1 downto 0);
+    port (
+        --- Control IN
+        reset : in std_logic;
+        clock : in std_logic;
+        RegWriteD : in std_logic;
+        ResultSrcD : in std_logic_vector(1 downto 0);
+        MemWriteD : in std_logic;
+        JumpD : in std_logic;
+        BranchD : in std_logic;
+        ALUControlD : in std_logic_vector(2 downto 0);
+        ALUSrcD : in std_logic;
+        ImmSrcD : in std_logic_vector(1 downto 0);
 
-            --- Mem In
-            InstrF : in std_logic_vector(31 downto 0);
-            ReadDataM : in std_logic_vector(31 downto 0);
+        --- Mem In
+        InstrF : in std_logic_vector(31 downto 0);
+        ReadDataM : in std_logic_vector(31 downto 0);
 
-            -- Mem Out
-            PCF : out std_logic_vector(31 downto 0);
-            ALUResultM : out std_logic_vector(31 downto 0);
-            WriteDataM : out std_logic_vector(31 downto 0);
-            MemWriteM : out std_logic
-        );
+        -- Mem Out
+        PCF : out std_logic_vector(31 downto 0);
+        ALUResultM : out std_logic_vector(31 downto 0);
+        WriteDataM : out std_logic_vector(31 downto 0);
+        MemWriteM : out std_logic
+    );
 end entity;
 
 architecture structural of DF is
@@ -36,10 +36,10 @@ architecture structural of DF is
             PCTargetE : in std_logic_vector(31 downto 0);
             PCSrcE : in std_logic;
             StallIF : in std_logic;
-            
+
             PCF : out std_logic_vector(31 downto 0);
             PCPlus4 : out std_logic_vector(31 downto 0)
-          );
+        );
     end component;
 
     component DF_ID is
@@ -50,12 +50,12 @@ architecture structural of DF is
             RegWriteW : in std_logic;
             ResultW : in std_logic_vector(31 downto 0);
             RdW : in std_logic_vector(4 downto 0);
-            
+
             -- Entradas de Controle
             ImmSrcD : in std_logic_vector(1 downto 0);
             -- Saídas de fluxo
-            RdD, RS1D, RS2D: out std_logic_vector(4 downto 0);
-            RD1D, RD2D, ImmExtD: out std_logic_vector(31 downto 0)
+            RdD, RS1D, RS2D : out std_logic_vector(4 downto 0);
+            RD1D, RD2D, ImmExtD : out std_logic_vector(31 downto 0)
         );
     end component;
 
@@ -63,7 +63,7 @@ architecture structural of DF is
         port (
             Clock : in std_logic;
             Reset : in std_logic;
-        --- Entradas
+            --- Entradas
             RD1E : in std_logic_vector(31 downto 0);
             RD2E : in std_logic_vector(31 downto 0);
             PCE : in std_logic_vector(31 downto 0);
@@ -74,69 +74,68 @@ architecture structural of DF is
             ALUsrcE : in std_logic;
             FowardAE : in std_logic_vector(1 downto 0);
             FowardBE : in std_logic_vector(1 downto 0);
-        --- Saídas
+            --- Saídas
             PCTargetE : out std_logic_vector(31 downto 0);
             WriteDataE : out std_logic_vector(31 downto 0);
             AluResultE : out std_logic_vector(31 downto 0);
             zeroE : out std_logic
-      );
+        );
     end component;
 
     component DF_WB is
         port (
             -- Entradas
             ReadDataW : in std_logic_vector(31 downto 0);
-            PCPlus4W  : in std_logic_vector(31 downto 0);
+            PCPlus4W : in std_logic_vector(31 downto 0);
             AluResultW : in std_logic_vector(31 downto 0);
             ResultSrcW : in std_logic_vector(1 downto 0);
             -- Saídas
             ResultW : out std_logic_vector(31 downto 0)
-          );
+        );
     end component;
 
     component register_d is
         generic (
-            constant N: integer := 8 
+            constant N : integer := 8
         );
         port (
-            clock  : in  std_logic;
-            clear  : in  std_logic;
-            enable : in  std_logic;
-            D      : in  std_logic_vector (N-1 downto 0);
-            Q      : out std_logic_vector (N-1 downto 0) 
+            clock : in std_logic;
+            clear : in std_logic;
+            enable : in std_logic;
+            D : in std_logic_vector (N - 1 downto 0);
+            Q : out std_logic_vector (N - 1 downto 0)
         );
     end component;
 
     component HAZARD_UNIT is
-        port(
-        -- Entradas
-        Rs1D   : in std_logic_vector(4 downto 0);
-        Rs2D   : in std_logic_vector(4 downto 0);
-        RdE    : in std_logic_vector(4 downto 0);
-        Rs2E   : in std_logic_vector(4 downto 0);
-        Rs1E   : in std_logic_vector(4 downto 0);
-        PCScrE : in std_logic;
-        ResultSrcE_0 : in std_logic;
-        RdM    : in std_logic_vector(4 downto 0);
-        RegWriteM : in std_logic;
-        RdW    : in std_logic_vector(4 downto 0);
-        RegWriteW : in std_logic;
-        -- Saidas
-        StallF : out std_logic;
-        StallD : out std_logic;
-        FlushD : out std_logic;
-        FlushE : out std_logic;
-        ForwardAE : out std_logic_vector(1 downto 0);
-        ForwardBE : out std_logic_vector(1 downto 0)
+        port (
+            -- Entradas
+            Rs1D : in std_logic_vector(4 downto 0);
+            Rs2D : in std_logic_vector(4 downto 0);
+            RdE : in std_logic_vector(4 downto 0);
+            Rs2E : in std_logic_vector(4 downto 0);
+            Rs1E : in std_logic_vector(4 downto 0);
+            PCScrE : in std_logic;
+            ResultSrcE_0 : in std_logic;
+            RdM : in std_logic_vector(4 downto 0);
+            RegWriteM : in std_logic;
+            RdW : in std_logic_vector(4 downto 0);
+            RegWriteW : in std_logic;
+            -- Saidas
+            StallF : out std_logic;
+            StallD : out std_logic;
+            FlushD : out std_logic;
+            FlushE : out std_logic;
+            ForwardAE : out std_logic_vector(1 downto 0);
+            ForwardBE : out std_logic_vector(1 downto 0)
         );
     end component;
 
     signal PCTargetE : std_logic_vector(31 downto 0);
     signal PCSrcE : std_logic;
-    signal StallF, FlushD, StallD, FlushE   : std_logic;
-    signal PCPlus4F  : std_logic_vector(31 downto 0);
+    signal StallF, FlushD, StallD, FlushE : std_logic;
+    signal PCPlus4F : std_logic_vector(31 downto 0);
 
- 
     signal InstrD : std_logic_vector(31 downto 0);
     signal ResultW : std_logic_vector(31 downto 0);
     signal RdW, RdE, RdM, RS1E, RS2E : std_logic_vector(4 downto 0);
@@ -146,7 +145,6 @@ architecture structural of DF is
     signal RS1D : std_logic_vector(4 downto 0);
     signal RS2D : std_logic_vector(4 downto 0);
     signal ImmExtD : std_logic_vector(31 downto 0);
-
 
     signal RD1E : std_logic_vector(31 downto 0);
     signal RD2E : std_logic_vector(31 downto 0);
@@ -158,45 +156,41 @@ architecture structural of DF is
     signal AluResultE : std_logic_vector(31 downto 0);
     signal zeroE : std_logic;
 
-
     signal s_AluResultM : std_logic_vector(31 downto 0);
-
 
     signal ReadDataW : std_logic_vector(31 downto 0);
     signal PCPlus4W : std_logic_vector(31 downto 0);
     signal AluResultW : std_logic_vector(31 downto 0);
 
-
     signal IF_ID_reg_IN, IF_ID_reg_OUT : std_logic_vector(95 downto 0);
     signal ID_EX_reg_IN, ID_EX_reg_OUT : std_logic_vector(184 downto 0);
     signal EX_MEM_reg_IN, EX_MEM_reg_OUT : std_logic_vector(104 downto 0);
     signal MEM_WB_reg_IN, MEM_WB_reg_OUT : std_logic_vector(103 downto 0);
-    
-    
+
     signal PCD, PCPlus4D, PCPlus4E, PCPlus4M : std_logic_vector(31 downto 0);
     signal RegWriteE, MemWriteE, jumpE, branchE, ALUSrcE, RegWriteM, RegWriteW : std_logic;
     signal ResultSrcE, ResultSrcM, ResultSrcW : std_logic_vector(1 downto 0);
     signal ALUControlE : std_logic_vector(2 downto 0);
 
 begin
-    
- 
+
     ---- IF
-    IF_inst: DF_IF
-        port map(
-            Clock => Clock,
-            Reset => Reset,
-            PCTargetE => PCTargetE,
-            PCSrcE => PCSrcE,
-            StallIF => StallF,
-            PCF => s_PCF,
-            PCPlus4 => PCPlus4F            
-        );
-    
+    IF_inst : DF_IF
+    port map(
+        Clock => Clock,
+        Reset => Reset,
+        PCTargetE => PCTargetE,
+        PCSrcE => PCSrcE,
+        StallIF => StallF,
+        PCF => s_PCF,
+        PCPlus4 => PCPlus4F
+    );
+
     IF_ID_reg_IN <= InstrF & s_PCF & PCPlus4F;
     PCF <= s_PCF;
 
-    IF_ID_reg : register_d generic map (96) port map(
+    IF_ID_reg : register_d generic map(
+        96) port map(
         clock => Clock,
         clear => FlushD,
         enable => StallD,
@@ -209,27 +203,27 @@ begin
     PCPlus4D <= IF_ID_reg_OUT(31 downto 0);
 
     ---- ID
-    ID_inst: DF_ID
-        port map(
-            Clock => Clock,
-            Reset => Reset,
-            InstrD => InstrD,
-            RegWriteW => RegWriteW,
-            ResultW => ResultW,
-            RdW => RdW,
-            ImmSrcD => ImmSrcD,
-            RD1D => RD1D,
-            RD2D => RD2D,
-            RdD => RdD,
-            RS1D => RS1D,
-            RS2D => RS2D,
-            ImmExtD => ImmExtD
-        );
+    ID_inst : DF_ID
+    port map(
+        Clock => Clock,
+        Reset => Reset,
+        InstrD => InstrD,
+        RegWriteW => RegWriteW,
+        ResultW => ResultW,
+        RdW => RdW,
+        ImmSrcD => ImmSrcD,
+        RD1D => RD1D,
+        RD2D => RD2D,
+        RdD => RdD,
+        RS1D => RS1D,
+        RS2D => RS2D,
+        ImmExtD => ImmExtD
+    );
 
-    
     ID_EX_reg_IN <= RegWriteD & ResultSrcD & MemWriteD & JumpD & BranchD & ALUControlD & ALUSrcD & RD1D & RD2D & PCD & RS1D & RS2D & RdD & ImmExtD & PCPlus4D; -- + 10 controle
 
-    ID_EX_reg : register_d generic map(185) port map (
+    ID_EX_reg : register_d generic map(
+        185) port map (
         clock => Clock,
         clear => FlushE,
         enable => '1',
@@ -253,100 +247,99 @@ begin
     ImmExtE <= ID_EX_reg_OUT(63 downto 32);
     PCPlus4E <= ID_EX_reg_OUT(31 downto 0);
 
+    PCSrcE <= JumpE or (BranchE and zeroE);
+
     ---- EX
 
-    EX_inst: DF_EX
-        port map(
-            Clock => Clock,
-            Reset => Reset,
-            RD1E => RD1E,
-            RD2E => RD2E,
-            PCE => PCE,
-            ImmExtE => ImmExtE,
-            AluResultM => s_AluResultM,
-            ResultW => ResultW,
-            ALUControlE => ALUControlE,
-            ALUsrcE => ALUsrcE,
-            FowardAE => ForwardAE,
-            FowardBE => ForwardBE,
-            PCTargetE => PCTargetE,
-            WriteDataE => WriteDataE,
-            AluResultE => AluResultE,
-            zeroE => zeroE
-        );
+    EX_inst : DF_EX
+    port map(
+        Clock => Clock,
+        Reset => Reset,
+        RD1E => RD1E,
+        RD2E => RD2E,
+        PCE => PCE,
+        ImmExtE => ImmExtE,
+        AluResultM => s_AluResultM,
+        ResultW => ResultW,
+        ALUControlE => ALUControlE,
+        ALUsrcE => ALUsrcE,
+        FowardAE => ForwardAE,
+        FowardBE => ForwardBE,
+        PCTargetE => PCTargetE,
+        WriteDataE => WriteDataE,
+        AluResultE => AluResultE,
+        zeroE => zeroE
+    );
 
-        EX_MEM_reg_IN <= RegWriteE & ResultSrcE & MemWriteE & AluResultE & WriteDataE & RdE & PCPlus4E; -- + 4 de controle
-        
-        EX_MEM_reg : register_d generic map(105) port map (
-            clock => Clock,
-            clear => '0',
-            enable => '1',
-            D => EX_MEM_reg_IN,
-            Q => EX_MEM_reg_OUT
-        );
+    EX_MEM_reg_IN <= RegWriteE & ResultSrcE & MemWriteE & AluResultE & WriteDataE & RdE & PCPlus4E; -- + 4 de controle
 
-        RegWriteM <= EX_MEM_reg_OUT(104);
-        ResultSrcM <= EX_MEM_reg_OUT(103 downto 102);
-        MemWriteM <= Ex_MEM_reg_OUT(101);
-        s_AluResultM <= EX_MEM_reg_OUT(100 downto 69);
-        WriteDataM <= EX_MEM_reg_OUT(68 downto 37);
-        RdM <= EX_MEM_reg_OUT(36 downto 32);
-        PCPlus4M <= EX_MEM_reg_OUT(31 downto 0);
-        AluResultM <= s_AluResultM;
+    EX_MEM_reg : register_d generic map(
+        105) port map (
+        clock => Clock,
+        clear => '0',
+        enable => '1',
+        D => EX_MEM_reg_IN,
+        Q => EX_MEM_reg_OUT
+    );
 
+    RegWriteM <= EX_MEM_reg_OUT(104);
+    ResultSrcM <= EX_MEM_reg_OUT(103 downto 102);
+    MemWriteM <= Ex_MEM_reg_OUT(101);
+    s_AluResultM <= EX_MEM_reg_OUT(100 downto 69);
+    WriteDataM <= EX_MEM_reg_OUT(68 downto 37);
+    RdM <= EX_MEM_reg_OUT(36 downto 32);
+    PCPlus4M <= EX_MEM_reg_OUT(31 downto 0);
+    AluResultM <= s_AluResultM;
 
     ----- MEM
-        
-        MEM_WB_reg_IN <= RegWriteM & ResultSrcM & s_ALUResultM & ReadDataM & RdM & PCPlus4M; -- + 3 sinais de controle
 
-        MEM_WB_reg : register_d generic map(104) port map (
-            clock => Clock,
-            clear => '0',
-            enable => '1',
-            D => MEM_WB_reg_IN,
-            Q => MEM_WB_reg_OUT
-        );
+    MEM_WB_reg_IN <= RegWriteM & ResultSrcM & s_ALUResultM & ReadDataM & RdM & PCPlus4M; -- + 3 sinais de controle
 
-        RegWriteW <= MEM_WB_reg_OUT(103);
-        ResultSrcW <= MEM_WB_reg_out(102 downto 101);
-        ALUResultW <= MEM_WB_reg_OUT(100 downto 69);
-        ReadDataW <= MEM_WB_reg_OUT(68 downto 37);
-        RdW <= MEM_WB_reg_OUT(36 downto 32);
-        PCPlus4W <= MEM_WB_reg_OUT(31 downto 0);
+    MEM_WB_reg : register_d generic map(
+        104) port map (
+        clock => Clock,
+        clear => '0',
+        enable => '1',
+        D => MEM_WB_reg_IN,
+        Q => MEM_WB_reg_OUT
+    );
 
-            	
+    RegWriteW <= MEM_WB_reg_OUT(103);
+    ResultSrcW <= MEM_WB_reg_out(102 downto 101);
+    ALUResultW <= MEM_WB_reg_OUT(100 downto 69);
+    ReadDataW <= MEM_WB_reg_OUT(68 downto 37);
+    RdW <= MEM_WB_reg_OUT(36 downto 32);
+    PCPlus4W <= MEM_WB_reg_OUT(31 downto 0);
+
     ----- WB
     WB_inst : DF_WB
-        port map(
-            ReadDataW => ReadDataW,
-            PCPlus4W => PCPlus4W,
-            AluResultW => AluResultW,
-            ResultSrcW => ResultSrcW,
-            ResultW => ResultW
-        );
+    port map(
+        ReadDataW => ReadDataW,
+        PCPlus4W => PCPlus4W,
+        AluResultW => AluResultW,
+        ResultSrcW => ResultSrcW,
+        ResultW => ResultW
+    );
 
-    
-    HU: HAZARD_UNIT
-        port map(
-            Rs1D => Rs1D,
-            Rs2D => Rs2D,
-            RdE => RdE,
-            Rs2E => Rs2E,
-            Rs1E => Rs1E,
-            PCScrE => PCSrcE,
-            ResultSrcE_0 => ResultSrcE(0),
-            RdM => RdM,
-            RegWriteM => RegWriteM,
-            RdW => RdW,
-            RegWriteW => RegWriteW,
-            StallF => StallF,
-            StallD => StallD,
-            FlushD => FlushD,
-            FlushE => FlushE,
-            ForwardAE => ForwardAE,
-            ForwardBE => ForwardBE
-        );
+    HU : HAZARD_UNIT
+    port map(
+        Rs1D => Rs1D,
+        Rs2D => Rs2D,
+        RdE => RdE,
+        Rs2E => Rs2E,
+        Rs1E => Rs1E,
+        PCScrE => PCSrcE,
+        ResultSrcE_0 => ResultSrcE(0),
+        RdM => RdM,
+        RegWriteM => RegWriteM,
+        RdW => RdW,
+        RegWriteW => RegWriteW,
+        StallF => StallF,
+        StallD => StallD,
+        FlushD => FlushD,
+        FlushE => FlushE,
+        ForwardAE => ForwardAE,
+        ForwardBE => ForwardBE
+    );
 
-
-
-end structural ; -- structural
+end structural; -- structural
