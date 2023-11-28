@@ -133,7 +133,7 @@ architecture structural of DF is
 
     signal PCTargetE : std_logic_vector(31 downto 0);
     signal PCSrcE : std_logic;
-    signal StallF, FlushD, StallD, FlushE : std_logic;
+    signal StallF, FlushD, StallD, NotStallD, FlushE : std_logic;
     signal PCPlus4F : std_logic_vector(31 downto 0);
 
     signal InstrD : std_logic_vector(31 downto 0);
@@ -188,12 +188,13 @@ begin
 
     IF_ID_reg_IN <= InstrF & s_PCF & PCPlus4F;
     PCF <= s_PCF;
+    NotStallD <= NOT(StallD);
 
     IF_ID_reg : register_d generic map(
         96) port map(
         clock => Clock,
         clear => FlushD,
-        enable => StallD,
+        enable => NotStallD,
         D => IF_ID_reg_IN,
         Q => IF_ID_reg_OUT
     );

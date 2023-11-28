@@ -22,13 +22,13 @@ architecture alu_1_bit_1 of alu_1_bit is
 begin
     a_aux <= A;
 
-    b_aux <= B when OP = "01" else
-             (NOT B); 
+    b_aux <= (NOT B) when OP = "01" else
+             B;
 
     and_aux <= a_aux AND b_aux;
     or_aux <= a_aux OR b_aux;
 
-    adder_aux <= ((a_aux XOR a_aux) XOR Ci);
+    adder_aux <= ((a_aux XOR b_aux) XOR Ci);
     Co <= (a_aux AND b_aux) OR (a_aux AND Ci) OR (b_aux AND Ci);
 
     result_aux <= and_aux when Op = "10" else
