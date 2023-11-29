@@ -42,25 +42,41 @@ architecture structural of HAZARD_UNIT is
     signal lwStall : std_logic;
 
 begin 
-    Rs1E_equal_to_RdM <= '1' when Rs1E = RdM else '0';
-    Rs1E_different_than_zero <= '1' when Rs1E /= zero else '0';
-    Rs1E_equal_to_RdW <= '1' when Rs1E = RdW else '0';
+    -- Rs1E_equal_to_RdM <= '1' when Rs1E = RdM else '0';
+    -- Rs1E_different_than_zero <= '1' when Rs1E /= zero else '0';
+    -- Rs1E_equal_to_RdW <= '1' when Rs1E = RdW else '0';
 
-    Rs2E_equal_to_RdM <= '1' when Rs2E = RdM else '0';
-    Rs2E_different_than_zero <= '1' when Rs2E /= zero else '0';
-    Rs2E_equal_to_RdW <= '1' when Rs2E = RdW else '0';
+    -- Rs2E_equal_to_RdM <= '1' when Rs2E = RdM else '0';
+    -- Rs2E_different_than_zero <= '1' when Rs2E /= zero else '0';
+    -- Rs2E_equal_to_RdW <= '1' when Rs2E = RdW else '0';
 
-    Rs1D_equal_to_RdE <= '1' when Rs1D = RdE else '0';
-    Rs2D_equal_to_RdE <= '1' when Rs2D = RdE else '0';
+    -- Rs1D_equal_to_RdE <= '1' when Rs1D = RdE else '0';
+    -- Rs2D_equal_to_RdE <= '1' when Rs2D = RdE else '0';
 
-    ForwardAE <= "10" when (Rs1E_equal_to_RdM and RegWriteM and Rs1E_different_than_zero) = '1' else
-                 "01" when (Rs1E_equal_to_RdW and RegWriteW and Rs1E_different_than_zero) = '1' else
-                 "00";
-    ForwardBE <= "10" when (Rs2E_equal_to_RdM and RegWriteM and Rs2E_different_than_zero) ='1' else 
-                 "01" when (Rs2E_equal_to_RdW and RegWriteW and Rs2E_different_than_zero) ='1' else
-                 "00";
+    -- ForwardAE <= "10" when (Rs1E_equal_to_RdM and RegWriteM and Rs1E_different_than_zero) = '1' else
+    --              "01" when (Rs1E_equal_to_RdW and RegWriteW and Rs1E_different_than_zero) = '1' else
+    --              "00";
+    -- ForwardBE <= "10" when (Rs2E_equal_to_RdM and RegWriteM and Rs2E_different_than_zero) ='1' else 
+    --              "01" when (Rs2E_equal_to_RdW and RegWriteW and Rs2E_different_than_zero) ='1' else
+    --              "00";
     
-    lwStall <= ResultSrcE_0 and (Rs1D_equal_to_RdE or Rs2D_equal_to_RdE);
+    -- lwStall <= ResultSrcE_0 and (Rs1D_equal_to_RdE or Rs2D_equal_to_RdE);
+    -- StallF <= lwStall;
+    -- StallD <= lwStall;
+
+    -- FlushD <= PCScrE;
+    -- FlushE <= lwStall or PCScrE;
+
+
+    ForwardAE <= "10" when (Rs1E = RdM) and RegWriteM = '1' and Rs1E /= "0000" else
+                 "01" when (Rs1E = RdW) and RegWriteM = '1' and Rs1E /= "0000" else
+                 "00";
+                 
+    ForwardBE <= "10" when (Rs2E = RdM) and RegWriteM = '1' and Rs2E /= "0000" else
+                 "01" when (Rs2E = RdW) and RegWriteM = '1' and Rs2E /= "0000" else
+                 "00";
+    lwStall <= '1' when ResultSrcE_0 = '1' and ((RS1D = RdE) or (Rs2D = RdE)) else
+               '0';
     StallF <= lwStall;
     StallD <= lwStall;
 
