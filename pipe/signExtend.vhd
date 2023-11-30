@@ -3,25 +3,17 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
 entity signExtend is
-    port(
-        i: in  std_logic_vector(24 downto 0);
-        imm_src: in std_logic_vector(1 downto 0);
-        o: out std_logic_vector(31 downto 0)
+    port (
+        i : in std_logic_vector(24 downto 0);
+        imm_src : in std_logic_vector(1 downto 0);
+        o : out std_logic_vector(31 downto 0)
     );
 end signExtend;
 
 architecture signExtend_1 of signExtend is
-    signal s_extend_20 : std_logic_vector(19 downto 0);
-    signal s_extend_12 : std_logic_vector(11 downto 0);
 begin
-    s_extend_20 <= (others => '0') when i(24) = '0' else
-                   (others => '1');
-
-    s_extend_12 <= (others => '0') when i(24) = '0' else
-                   (others => '1');
-
-    o <= s_extend_20 & i(24 downto 13) when imm_src = "00" else
-         s_extend_20 & i(24 downto 18) & i(4 downto 0) when imm_src = "01" else
-         s_extend_20 & i(7) & i(23 downto 18) & i(4 downto 1) & '1' when imm_src = "10" else
-         s_extend_12 & i(12 downto 5) & i(13) & i(23 downto 14) & '1';
+    o <= (31 downto 12 => i(24)) & i(24 downto 13) when imm_src = "00" else
+         (31 downto 12 => i(24)) & i(24 downto 18) & i(4 downto 0) when imm_src = "01" else
+         (31 downto 12 => i(24)) & i(0) & i(23 downto 18) & i(4 downto 1) & '0' when imm_src = "10" else
+         (31 downto 20 => i(24)) & i(12 downto 5) & i(13) & i(23 downto 14) & '0';
 end architecture;
