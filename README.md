@@ -13,6 +13,7 @@ Repositório de projeto desenvolvido em grupo para a disciplina PCS3612 - Arquit
 ## - [🔰: Inicialização](Inicialização)
 
 ## - [📂: Organização](Organização)
+```bash
 .
 ├── extra
 ├── pipe                   # Arquivos do pipeline
@@ -42,3 +43,4 @@ Repositório de projeto desenvolvido em grupo para a disciplina PCS3612 - Arquit
 ├── .gitignore              
 ├── CITATION.cff
 └── README.md
+```
