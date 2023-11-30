@@ -2,7 +2,7 @@ library ieee;
 use ieee.std_logic_1164.all;
 
 entity riscv_pp is
-    port(
+    port (
         clock : in std_logic;
         reset : in std_logic;
 
@@ -19,9 +19,9 @@ entity riscv_pp is
 end entity;
 
 architecture structural of riscv_pp is
-    
+
     component UC is
-        port(
+        port (
             --To Datapath
             RegWriteD : out std_logic;
             ResultSrcD : out std_logic_vector(1 downto 0);
@@ -31,17 +31,17 @@ architecture structural of riscv_pp is
             ALUControlD : out std_logic_vector(2 downto 0);
             ALUSrcD : out std_logic;
             ImmSrcD : out std_logic_vector(1 downto 0);
-            
+
             --From Datapath
             opcode : in std_logic_vector(6 downto 0);
             funct3 : in std_logic_vector(2 downto 0);
             funct7 : in std_logic_vector(6 downto 0)
         );
-    
+
     end component;
 
     component DF is
-        port(
+        port (
             --- Control IN
             reset : in std_logic;
             clock : in std_logic;
@@ -62,7 +62,13 @@ architecture structural of riscv_pp is
             PCF : out std_logic_vector(31 downto 0);
             ALUResultM : out std_logic_vector(31 downto 0);
             WriteDataM : out std_logic_vector(31 downto 0);
-            MemWriteM : out std_logic
+            MemWriteM : out std_logic;
+
+            -- To UC
+
+            opcode : out std_logic_vector(6 downto 0);
+            funct3 : out std_logic_vector(2 downto 0);
+            funct7 : out std_logic_vector(6 downto 0)
         );
     end component;
 
@@ -74,42 +80,48 @@ architecture structural of riscv_pp is
     signal ALUControlD : std_logic_vector(2 downto 0);
     signal ALUSrcD : std_logic;
     signal ImmSrcD : std_logic_vector(1 downto 0);
+    signal opcode : std_logic_vector(6 downto 0);
+    signal funct3 : std_logic_vector(2 downto 0);
+    signal funct7 : std_logic_vector(6 downto 0);
 
-    begin
+begin
 
-    UnidCtrl: UC
-        port map(
-            RegWriteD => RegWriteD,
-            ResultSrcD => ResultSrcD,
-            MemWriteD => MemWriteD,
-            JumpD => JumpD,
-            BranchD => BranchD,
-            ALUControlD => ALUControlD,
-            ALUSrcD => ALUSrcD,
-            ImmSrcD => ImmSrcD,
-            opcode => InstrF(6 downto 0),
-            funct3 => InstrF(14 downto 12),
-            funct7 => InstrF(31 downto 25)
-        );
-    
-    FluxDad: DF
-        port map(
-            reset => reset,
-            clock => clock,
-            RegWriteD => RegWriteD,
-            ResultSrcD => ResultSrcD,
-            MemWriteD => MemWriteD,
-            JumpD => JumpD,
-            BranchD => BranchD,
-            ALUControlD => ALUControlD,
-            ALUSrcD => ALUSrcD,
-            ImmSrcD => ImmSrcD,
-            InstrF => InstrF,
-            ReadDataM => ReadDataM,
-            PCF => PCF,
-            ALUResultM => ALUResultM,
-            WriteDataM => WriteDataM,
-            MemWriteM => MemWriteM
-        );
+    UnidCtrl : UC
+    port map(
+        RegWriteD => RegWriteD,
+        ResultSrcD => ResultSrcD,
+        MemWriteD => MemWriteD,
+        JumpD => JumpD,
+        BranchD => BranchD,
+        ALUControlD => ALUControlD,
+        ALUSrcD => ALUSrcD,
+        ImmSrcD => ImmSrcD,
+        opcode => opcode,
+        funct3 => funct3,
+        funct7 => funct7
+    );
 
-end structural ; -- structural
+    FluxDad : DF
+    port map(
+        reset => reset,
+        clock => clock,
+        RegWriteD => RegWriteD,
+        ResultSrcD => ResultSrcD,
+        MemWriteD => MemWriteD,
+        JumpD => JumpD,
+        BranchD => BranchD,
+        ALUControlD => ALUControlD,
+        ALUSrcD => ALUSrcD,
+        ImmSrcD => ImmSrcD,
+        InstrF => InstrF,
+        ReadDataM => ReadDataM,
+        PCF => PCF,
+        ALUResultM => ALUResultM,
+        WriteDataM => WriteDataM,
+        MemWriteM => MemWriteM,
+        opcode => opcode,
+        funct3 => funct3,
+        funct7 => funct7
+    );
+
+end structural; -- structural

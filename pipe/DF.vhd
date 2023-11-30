@@ -23,7 +23,13 @@ entity DF is
         PCF : out std_logic_vector(31 downto 0);
         ALUResultM : out std_logic_vector(31 downto 0);
         WriteDataM : out std_logic_vector(31 downto 0);
-        MemWriteM : out std_logic
+        MemWriteM : out std_logic;
+
+        -- To UC
+
+        opcode : out std_logic_vector(6 downto 0);
+        funct3 : out std_logic_vector(2 downto 0);
+        funct7 : out std_logic_vector(6 downto 0)
     );
 end entity;
 
@@ -188,7 +194,7 @@ begin
 
     IF_ID_reg_IN <= InstrF & s_PCF & PCPlus4F;
     PCF <= s_PCF;
-    NotStallD <= NOT(StallD);
+    NotStallD <= not(StallD);
 
     IF_ID_reg : register_d generic map(
         96) port map(
@@ -202,6 +208,10 @@ begin
     InstrD <= IF_ID_reg_OUT(95 downto 64);
     PCD <= IF_ID_reg_OUT(63 downto 32);
     PCPlus4D <= IF_ID_reg_OUT(31 downto 0);
+
+    opcode <= InstrD(6 downto 0);
+    funct3 <= InstrD(14 downto 12);
+    funct7 <= InstrD(31 downto 25);
 
     ---- ID
     ID_inst : DF_ID
