@@ -1,0 +1,22 @@
+# This CITATION.cff file was generated with cffinit.
+# Visit https://bit.ly/cffinit to generate yours today!
+
+cff-version: 1.2.0
+title: >-
+  Pipeline RISC-V (Organização e Arquitetura de Computadores
+  I)
+message: >-
+  Projeto de implementação do pipeline com tecnologia RISC-V
+  para a disciplina Organização e Arquitetura de
+  Computadores I.
+type: software
+authors:
+  - given-names: Kauã Fillipe
+    family-names: Rodrigues da Silva
+  - given-names: 'Júlia '
+    family-names: Carvalho Muniz
+  - given-names: 'Miguel '
+    family-names: Shiniti Aguena
+  - given-names: Miguel
+    family-names: Velasques Abilio Piola Alves
+repository-code: 'https://github.com/MiguelAguena/riscv-pipeline.git'
