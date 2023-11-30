@@ -123,7 +123,7 @@ begin
 
         -- Insira lógica de teste aqui
 
-        wait for (program'length * 5 + 3) * clockPeriod;
+        wait for (program'length * 5 + 3) * clockPeriod * 100;
 
         assert false report "Fim das simulacoes" severity note;
         keep_simulating <= '0';

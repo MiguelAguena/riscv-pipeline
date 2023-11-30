@@ -20,9 +20,9 @@ begin
 
 process(clock, clear, enable, IQ)
     begin
-        if (clear = '1') then IQ <= (others => '0');
-        elsif (clock'event and clock='1') then
-            if (enable='1') then IQ <= D; 
+        if (clock'event and clock='1') then
+            if (clear = '1') then IQ <= (others => '0');
+            elsif (enable='1') then IQ <= D; 
             else IQ <= IQ;
             end if;
         end if;

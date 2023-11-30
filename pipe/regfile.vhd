@@ -29,12 +29,14 @@ architecture regfile_1 of regfile is
 begin
     register_dBank: process(clock, reset) is
         begin
-            if(reset = '1') then
-                zerando: for i in 1 to 31 loop
-                    regbank(i) <= (others => '0');
-                end loop;
-            elsif (clock'event and clock = '1' and regWrite = '1' and to_integer(unsigned(wr)) /= 0) then
-                regbank(to_integer(unsigned(wr))) <= d;
+            if (clock'event and clock = '1') then
+                if(reset = '1') then
+                    zerando: for i in 1 to 31 loop
+                        regbank(i) <= (others => '0');
+                    end loop;
+                elsif(regWrite = '1' and to_integer(unsigned(wr)) /= 0) then
+                    regbank(to_integer(unsigned(wr))) <= d;
+                end if;
             end if;
     end process;
 
