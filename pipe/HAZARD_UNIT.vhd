@@ -68,12 +68,12 @@ begin
     -- FlushE <= lwStall or PCScrE;
 
 
-    ForwardAE <= "10" when (Rs1E = RdM) and RegWriteM = '1' and Rs1E /= "0000" else
-                 "01" when (Rs1E = RdW) and RegWriteM = '1' and Rs1E /= "0000" else
+    ForwardAE <= "10" when (Rs1E = RdM) and RegWriteM = '1' and Rs1E /= "00000" else
+                 "01" when (Rs1E = RdW) and RegWriteM = '1' and Rs1E /= "00000" else
                  "00";
                  
-    ForwardBE <= "10" when (Rs2E = RdM) and RegWriteM = '1' and Rs2E /= "0000" else
-                 "01" when (Rs2E = RdW) and RegWriteM = '1' and Rs2E /= "0000" else
+    ForwardBE <= "10" when (Rs2E = RdM) and RegWriteM = '1' and Rs2E /= "00000" else
+                 "01" when (Rs2E = RdW) and RegWriteM = '1' and Rs2E /= "00000" else
                  "00";
     lwStall <= '1' when ResultSrcE_0 = '1' and ((RS1D = RdE) or (Rs2D = RdE)) else
                '0';
