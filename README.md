@@ -4,7 +4,7 @@
 
 Repositório de projeto desenvolvido em grupo para a disciplina PCS3612 - Arquitetura e Organização de Computadores I, oferecida no segundo semestre de 2023. A atividade consiste na implementação, em linguagem VHDL, do pipeline para um processador com tecnologia RISC-V.
 
-## - [💻: Teconologias Utilizadas](TecnologiasUtilizadas)
+## - [💻: Tecnologias Utilizadas](TecnologiasUtilizadas)
 
 * Linguagem VHDL
   * Bibliotecas ieee, ieee.std_logic_1164.all, ieee.numeric_std.all, ieee.math_real.all, std.textio.all e ieee.numeric_bit.all
@@ -15,7 +15,6 @@ Repositório de projeto desenvolvido em grupo para a disciplina PCS3612 - Arquit
 ## - [📂: Organização](Organização)
 ```bash
 .
-├── extra
 ├── pipe                   # Arquivos do pipeline
 │   ├── work               # Pasta work do VHDL
 │   ├── DF.vhd             # Componente do Fluxo de dados
@@ -28,18 +27,18 @@ Repositório de projeto desenvolvido em grupo para a disciplina PCS3612 - Arquit
 │   ├── alu.vhd            # Componente da ULA
 |   ├── alu_1_bit.vhd      # Componente de ULA de 1 bit
 |   ├── aludecoder.vhd     # Componente de decodificador de ULA
-|   ├── maindec.vhd  
-|   ├── program.vhd  
-|   ├── ram.vhd  
-|   ├── regfile.vhd  
-|   ├── register_d.vhd  
-|   ├── riscv_pp.vhd  
-|   ├── riscv_pp_tb.vhd  
-|   ├── rom.vhd  
-|   ├── signExtend.vhd  
-|   ├── signExtend.vhd.bak
-|   ├── vsim.wlf
-│   └── wave.do               
+|   ├── maindec.vhd        # Componente de decodificador dos sinais de controle
+|   ├── program.vhd        # Código do RISC-V de Harris e Harris usado como referência para testes 
+|   ├── ram.vhd            # Componente de RAM
+|   ├── regfile.vhd        # Componente de banco de registradores
+|   ├── register_d.vhd     # Componente de registrador do tipo D
+|   ├── riscv_pp.vhd       # Arquivo principal do pipeline do risc-v
+|   ├── riscv_pp_tb.vhd    # Arquivo de teste do pipeline
+|   ├── rom.vhd            # Componente de ROM
+|   ├── signExtend.vhd     # Componente de extensor de sinal
+|   ├── signExtend.vhd.bak # Output da simulação
+|   ├── vsim.wlf           # Output da simulação
+│   └── wave.do            # Output da simulação
 ├── .gitignore              
 ├── CITATION.cff
 └── README.md
