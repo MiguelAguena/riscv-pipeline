@@ -37,7 +37,6 @@ architecture alu_1 of alu is
     signal zero_aux : std_logic_vector(size-1 downto 0) := (others => '0');
     signal slt_out : std_logic_vector(size-1 downto 0) := (others => '0');
 begin
-    slt_out(0) <= '1'; 
     op_aux <= S(1 downto 0);     
 
     not_b_aux <= '1' when op_aux = "01" else
@@ -81,7 +80,8 @@ begin
 
     Ov <= ov_aux;
 
-    slt_aux <= (NOT(A(size-1) XOR B(size-1)) AND NOT(co_aux(size-1))) OR (A(size-1) AND NOT(B(size-1)));
+    slt_aux <= (NOT(A(size-1) XOR B(size-1)) AND (result_aux(size-1))) OR (A(size-1) AND NOT(B(size-1)));
+    slt_out(0) <= slt_aux;
 
     Z <= '1' when result_aux = zero_aux else
          '0';
