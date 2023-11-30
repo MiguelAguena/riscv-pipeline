@@ -8,9 +8,13 @@ Repositório de projeto desenvolvido em grupo para a disciplina PCS3612 - Arquit
 
 * Linguagem VHDL
   * Bibliotecas ieee, ieee.std_logic_1164.all, ieee.numeric_std.all, ieee.math_real.all, std.textio.all e ieee.numeric_bit.all
-* IDE VSCode
+* IDE VSCode (código)
+* Questa 2021.2 (simulação)
+* ModelSim 2020.1 (simulação)
+* Quartus Prime 20.1 (simulação)
   
 ## - [🔰: Inicialização](Inicialização)
+
 
 ## - [📂: Organização](Organização)
 ```bash
