@@ -4,7 +4,7 @@
 
 Repositório de projeto desenvolvido em grupo para a disciplina PCS3612 - Arquitetura e Organização de Computadores I, oferecida no segundo semestre de 2023. A atividade consiste na implementação, em linguagem VHDL, do pipeline para um processador com tecnologia RISC-V.
 
-## - [💻: Tecnologias Utilizadas](Tecnologias Utilizadas)
+## - [💻: Teconologias Utilizadas](TecnologiasUtilizadas)
 
 * Linguagem VHDL
   * Bibliotecas ieee, ieee.std_logic_1164.all, ieee.numeric_std.all, ieee.math_real.all, std.textio.all e ieee.numeric_bit.all
