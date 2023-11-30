@@ -15,6 +15,11 @@ Repositório de projeto desenvolvido em grupo para a disciplina PCS3612 - Arquit
   
 ## - [🔰: Inicialização](Inicialização)
 
+Para acessar o processador desenvolvido, abra a pasta pipe no ModelSim ou Questa e, após a compilação de todos os 
+arquivos, inicie a simulação da entidade riscv_pp_tb. Essa simulação é carregada com o código presente em program.txt. 
+Para realizar testes adicionais, altere o conteúdo desse arquivo para a representação hexadecimal das instruções a
+serem executadas. Os sinais observados na simulação podem ser escolhidos pela interface do ModelSim ou Questa.
+
 
 ## - [📂: Organização](Organização)
 ```bash
